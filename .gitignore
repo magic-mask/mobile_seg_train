@@ -1,0 +1,21 @@
+# python cache files
+__pycache__/
+# python environments
+venv/
+.venv/
+uv.lock
+.python-version
+
+# model files
+weights/
+
+# dataset
+bucket/
+all_dataset/
+
+
+# media files
+output/
+sample/
+
+
