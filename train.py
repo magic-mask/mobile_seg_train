@@ -175,7 +175,7 @@ def train_model():
     _, val_dataset = random_split(val_dataset_no_aug, [train_size, val_size], generator=generator)
 
     # DataLoader 생성 (Batch Size는 A17 Pro 이외 학습 환경에 맞춰 조절 가능)
-    batch_size = 16
+    batch_size = 32
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
@@ -183,8 +183,8 @@ def train_model():
     model = OptimizedMaskSegmentation(in_channels=3, out_channels=1, base_c=32).to(device)
     
     # 하이퍼파라미터 및 학습 객체 설정
-    epochs = 50
-    learning_rate = 1e-3
+    epochs = 150
+    learning_rate = 1.5e-3 #1e-3
     
     # ========== Loss Functions (BCE + Dice) ==========
     bce_loss = nn.BCEWithLogitsLoss()
@@ -255,7 +255,7 @@ def train_model():
         # ========== Best Model 저장 기준 변경: Dice 기준 ==========
         if avg_val_dice > best_dice:
             best_dice = avg_val_dice
-            torch.save(model.state_dict(), "weights/mobile_unet_20260603.pth")
+            torch.save(model.state_dict(), "weights/mobile_unet_20260604.pth")
             print(f"--> Saved new best model with Dice: {best_dice:.4f}")
 
     print("Training complete.")

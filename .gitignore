@@ -12,6 +12,7 @@ weights/
 # dataset
 bucket/
 all_dataset/
+OLD_dataset/
 
 
 # media files

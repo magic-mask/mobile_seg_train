@@ -8,7 +8,7 @@ from PIL import Image
 import torch
 import torchvision.transforms as transforms
 
-from model import UltraLightUNet
+from model import OptimizedMaskSegmentation
 
 
 
@@ -34,7 +34,7 @@ def run_video_inference(
     if isinstance(checkpoint, dict) and "state_dict" in checkpoint:
         base_c = checkpoint.get("base_c", 32)
 
-        model = UltraLightUNet(
+        model = OptimizedMaskSegmentation(
             in_channels=3,
             out_channels=1,
             base_c=base_c,
@@ -44,7 +44,7 @@ def run_video_inference(
             checkpoint["state_dict"]
         )
     else:
-        model = UltraLightUNet(
+        model = OptimizedMaskSegmentation(
             in_channels=3,
             out_channels=1,
             base_c=32,
@@ -155,7 +155,7 @@ if __name__ == "__main__":
 
     run_video_inference(
         video_path=VIDEO_PATH,
-        model_path="weights/best_ultralight_unet.pth",
+        model_path="weights/mobile_unet_20260604.pth",
         threshold=0.5,
         image_size=384,
     )
