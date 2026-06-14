@@ -13,7 +13,7 @@ from model import OptimizedMaskSegmentation
 
 def run_inference(
     image_path,
-    model_path="weights/best_ultralight_unet.pth",
+    model_path="weights/sobel_unet_20260604.pth",
     output_dir="output",
     threshold=0.5,
     image_size=384,

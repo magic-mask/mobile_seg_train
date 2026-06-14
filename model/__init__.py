@@ -1,4 +1,6 @@
-from .ultralight_unet import UltraLightUNet
-from .mobile_unet import OptimizedMaskSegmentation
+# model/__init__.py
 
-__all__ = ["UltraLightUNet", "OptimizedMaskSegmentation"]
+from .sobel_unet import OptimizedMaskSegmentation
+from .ultralight_unet import UltraLightUNet
+
+__all__ = ["OptimizedMaskSegmentation", "UltraLightUNet"]

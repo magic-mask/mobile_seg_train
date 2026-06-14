@@ -1,3 +1,5 @@
+# train.py
+
 import os
 import numpy as np
 import torch
@@ -148,13 +150,15 @@ def train_model():
         torch.cuda.manual_seed(SEED)
         torch.cuda.manual_seed_all(SEED)
     
-    # 장치 할당 (CUDA > MPS > CPU)
+    # 장치 할당 (CUDA > CPU)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
 
     # 데이터셋 경로 지정
-    IMAGES_DIR = "bucket/images"
-    MASKS_DIR = "bucket/masks"
+    #IMAGES_DIR = "bucket/images"
+    #MASKS_DIR = "bucket/masks"
+    IMAGES_DIR = "all_dataset/sd_images_954/images"
+    MASKS_DIR = "all_dataset/sd_images_954/masks"
     
     # 데이터셋 인스턴스 생성
     full_dataset = RealSegmentationDataset(images_dir=IMAGES_DIR, masks_dir=MASKS_DIR, is_train=True)
@@ -255,7 +259,7 @@ def train_model():
         # ========== Best Model 저장 기준 변경: Dice 기준 ==========
         if avg_val_dice > best_dice:
             best_dice = avg_val_dice
-            torch.save(model.state_dict(), "weights/mobile_unet_20260604.pth")
+            torch.save(model.state_dict(), "weights/sobel_unet_20260614.pth")
             print(f"--> Saved new best model with Dice: {best_dice:.4f}")
 
     print("Training complete.")
